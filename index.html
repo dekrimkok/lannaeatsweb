@@ -20,7 +20,7 @@
 </head>
 <body class="pb-24 text-gray-800 antialiased select-none">
 
-    <!-- Sticky Mobile Header -->
+    <!-- Header & App Layout -->
     <header class="sticky top-0 z-40 bg-amber-900 text-white shadow-md border-b border-amber-800">
         <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-2.5">
@@ -32,7 +32,6 @@
                     <p class="text-[10px] text-amber-200/80 mt-0.5">รสเหนือแท้ ส่งตรงถึงคุณ</p>
                 </div>
             </div>
-            <!-- Branch Selector -->
             <div class="relative">
                 <select id="stallSelect" class="bg-amber-950/80 text-amber-100 text-xs rounded-xl px-3 py-1.5 border border-amber-700/60 outline-none pr-7 appearance-none font-medium cursor-pointer">
                     <option value="S1">สาขา Chang Klan</option>
@@ -44,12 +43,9 @@
         </div>
     </header>
 
-    <!-- Activity Banner (Lucky Wheel Campaign) -->
+    <!-- Activity Banner -->
     <section class="max-w-md mx-auto p-4">
         <div class="bg-gradient-to-r from-amber-700 via-orange-600 to-amber-600 rounded-3xl p-4 text-white shadow-lg relative overflow-hidden">
-            <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl"></div>
-            <i class="fa-solid fa-dharmachakra absolute -right-4 -bottom-4 text-8xl text-white/10 rotate-12"></i>
-
             <div class="relative z-10">
                 <div class="inline-flex items-center space-x-1.5 bg-amber-900/40 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-medium text-amber-200 border border-amber-400/20 mb-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
@@ -67,13 +63,11 @@
 
     <!-- Search & Filter Controls -->
     <section class="max-w-md mx-auto px-4 mb-4">
-        <!-- Search Bar -->
         <div class="relative mb-3">
             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
             <input type="text" id="searchInput" oninput="filterMenu()" placeholder="ค้นหา ข้าวซอย, ไส้อั่ว, เครื่องดื่ม..." class="w-full pl-10 pr-4 py-2.5 bg-white rounded-2xl text-xs border border-gray-200/80 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-sm placeholder-gray-400">
         </div>
 
-        <!-- Category Filter Buttons -->
         <div class="flex space-x-2 overflow-x-auto pb-1 text-xs no-scrollbar">
             <button onclick="setCategory('all')" id="cat-all" class="cat-btn bg-amber-800 text-white px-4 py-2 rounded-xl font-medium whitespace-nowrap shadow-sm transition">ทั้งหมด</button>
             <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🍜 เมนูเส้น/ข้าวซอย</button>
@@ -82,7 +76,7 @@
         </div>
     </section>
 
-    <!-- Active Discount Alert Banner -->
+    <!-- Active Discount Banner -->
     <section id="activeDiscountBanner" class="max-w-md mx-auto px-4 hidden mb-3">
         <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-2.5 rounded-2xl text-xs flex justify-between items-center shadow-sm">
             <div class="flex items-center space-x-2">
@@ -95,9 +89,7 @@
 
     <!-- Menu Catalog Items -->
     <main class="max-w-md mx-auto px-4">
-        <div id="menuContainer" class="grid grid-cols-1 gap-3.5">
-            <!-- Dynamically populated menu cards -->
-        </div>
+        <div id="menuContainer" class="grid grid-cols-1 gap-3.5"></div>
     </main>
 
     <!-- Bottom Sticky Checkout Bar -->
@@ -122,85 +114,77 @@
         </div>
     </div>
 
-    <!-- Lucky Wheel Modal -->
+    <!-- Modals -->
     <div id="wheelModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-xs w-full p-6 text-center shadow-2xl relative border border-gray-100">
             <button onclick="closeLuckyWheel()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 w-8 h-8 rounded-full flex items-center justify-center bg-gray-100">
                 <i class="fa-solid fa-xmark text-base"></i>
             </button>
-            <div class="w-12 h-12 bg-amber-100 text-amber-800 rounded-2xl mx-auto flex items-center justify-center mb-2 text-xl">
-                <i class="fa-solid fa-arrows-spin"></i>
-            </div>
             <h3 class="text-base font-bold text-gray-900">วงล้อล้านนาพาโชค</h3>
             <p class="text-xs text-gray-500 mb-4">กดปุ่มเพื่อรับส่วนลดประจำวัน!</p>
-
-            <!-- Wheel Circle Visual -->
             <div class="relative w-48 h-48 mx-auto my-3">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 text-red-600 text-xl drop-shadow">
-                    <i class="fa-solid fa-caret-down"></i>
-                </div>
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 text-red-600 text-xl drop-shadow"><i class="fa-solid fa-caret-down"></i></div>
                 <div id="wheelCircle" class="w-full h-full rounded-full border-4 border-amber-600 shadow-inner overflow-hidden wheel-rotate flex items-center justify-center bg-gradient-to-tr from-amber-500 via-orange-400 to-amber-300 p-2">
                     <div class="w-full h-full rounded-full border-2 border-white/40 border-dashed flex items-center justify-center text-center p-2">
-                        <span class="text-amber-950 font-extrabold text-xs leading-snug">
-                            🎁 ลุ้นส่วนลด<br>10% - 20%
-                        </span>
+                        <span class="text-amber-950 font-extrabold text-xs leading-snug">🎁 ลุ้นส่วนลด<br>10% - 20%</span>
                     </div>
                 </div>
             </div>
-
             <p id="wheelResult" class="text-xs font-bold text-emerald-700 min-h-[20px] my-2"></p>
-
-            <button id="spinBtn" onclick="spinWheel()" class="w-full bg-gradient-to-r from-amber-700 to-orange-600 text-white py-3 rounded-2xl font-bold text-xs shadow-md hover:opacity-95 active:scale-95 transition">
-                หมุนวงล้อเสี่ยงโชค
-            </button>
+            <button id="spinBtn" onclick="spinWheel()" class="w-full bg-gradient-to-r from-amber-700 to-orange-600 text-white py-3 rounded-2xl font-bold text-xs shadow-md">หมุนวงล้อเสี่ยงโชค</button>
         </div>
     </div>
 
-    <!-- Cart Modal Drawer -->
     <div id="cartModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end justify-center hidden">
         <div class="bg-white rounded-t-3xl max-w-md w-full p-5 max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col">
             <div class="flex justify-between items-center pb-3 border-b border-gray-100">
-                <h3 class="font-bold text-gray-800 text-base flex items-center">
-                    <i class="fa-solid fa-basket-shopping text-amber-800 mr-2"></i> รายการอาหารในตะกร้า
-                </h3>
-                <button onclick="closeCartModal()" class="text-gray-400 hover:text-gray-600 w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark text-sm"></i>
-                </button>
+                <h3 class="font-bold text-gray-800 text-base flex items-center"><i class="fa-solid fa-basket-shopping text-amber-800 mr-2"></i> รายการอาหารในตะกร้า</h3>
+                <button onclick="closeCartModal()" class="text-gray-400 hover:text-gray-600 w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
-
-            <!-- Items List -->
-            <div id="cartItemsList" class="divide-y divide-gray-100 my-3 flex-1">
-                <!-- Cart items list populated dynamically -->
-            </div>
-
-            <!-- Price Calculations Breakdown -->
+            <div id="cartItemsList" class="divide-y divide-gray-100 my-3 flex-1"></div>
             <div class="bg-amber-50/60 rounded-2xl p-3.5 text-xs space-y-2 mb-4 border border-amber-100">
-                <div class="flex justify-between text-gray-600">
-                    <span>ราคารวมรายการอาหาร</span>
-                    <span><span id="subtotalPrice">0</span> ฿</span>
-                </div>
-                <div class="flex justify-between text-emerald-700 font-medium">
-                    <span>ส่วนลดคูปองพาโชค</span>
-                    <span>-<span id="discountAmount">0</span> ฿</span>
-                </div>
-                <div class="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-amber-200/60">
-                    <span>ยอดชำระสุทธิ</span>
-                    <span class="text-amber-900"><span id="finalTotalPrice">0</span> ฿</span>
-                </div>
+                <div class="flex justify-between text-gray-600"><span>ราคารวมรายการอาหาร</span><span><span id="subtotalPrice">0</span> ฿</span></div>
+                <div class="flex justify-between text-emerald-700 font-medium"><span>ส่วนลดคูปองพาโชค</span><span>-<span id="discountAmount">0</span> ฿</span></div>
+                <div class="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-amber-200/60"><span>ยอดชำระสุทธิ</span><span class="text-amber-900"><span id="finalTotalPrice">0</span> ฿</span></div>
             </div>
-
-            <!-- Checkout Action Button -->
-            <button onclick="checkout()" class="w-full bg-amber-800 hover:bg-amber-900 text-white py-3.5 rounded-2xl font-bold text-xs shadow-md active:scale-95 transition">
-                ยืนยันคำสั่งซื้อ
-            </button>
+            <button onclick="checkout()" class="w-full bg-amber-800 hover:bg-amber-900 text-white py-3.5 rounded-2xl font-bold text-xs shadow-md">ยืนยันคำสั่งซื้อ</button>
         </div>
     </div>
 
     <script>
-        // Custom Self-Contained Vector Graphics Generator (No external URLs needed)
         const svgGraphics = {
             M01: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FEF3C7"/><circle cx="50" cy="52" r="38" fill="#D97706"/><circle cx="50" cy="50" r="34" fill="#B45309"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#F59E0B"/><path d="M38 30 Q50 15 62 30 Q50 45 38 30" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/><path d="M30 52 Q50 64 70 52" stroke="#FEF08A" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="42" cy="42" r="3" fill="#65A30D"/><circle cx="58" cy="46" r="2.5" fill="#65A30D"/><rect x="62" y="25" width="12" height="8" rx="2" fill="#EAB308" transform="rotate(15 62 25)"/></svg>`,
-            M02: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FEF3C7"/><circle cx="50" cy="52" r="38" fill="#92400E"/><circle cx="50" cy="50" r="34" fill="#78350F"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#B45309"/><rect x="36" y="38" width="12" height="10" rx="2" fill="#451A03"/><rect x="52" y="42" width="14" height="11" rx="2" fill="#451A03"/><rect x="42" y="52" width="10" height="9" rx="2" fill="#451A03"/><path d="M30 50 Q50 62 70 50" stroke="#FDE047" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="48" cy="36" r="3" fill="#16A34A"/><circle cx="56" cy="38" r="2.5" fill="#16A34A"/></svg>`,
+            
+            // 🥩 อัปเดตข้าวซอยเนื้อ (M02) ชัดเจนยิ่งขึ้น
+            M02: `<svg viewBox="0 0 100 100" class="w-full h-full">
+                <!-- พื้นหลังชาม & น้ำแกงเข้มข้น -->
+                <rect width="100" height="100" fill="#FEF3C7"/>
+                <circle cx="50" cy="52" r="38" fill="#78350F"/>
+                <circle cx="50" cy="50" r="34" fill="#581C87" opacity="0.15"/>
+                <circle cx="50" cy="50" r="33" fill="#92400E"/>
+                <!-- น้ำมันพริกเผาหน้าแกง -->
+                <path d="M 22 45 C 35 32, 65 32, 78 45 C 68 62, 32 62, 22 45 Z" fill="#B45309"/>
+                <path d="M 30 40 Q 50 30 70 40 Q 60 55 30 40 Z" fill="#991B1B" opacity="0.7"/>
+                <!-- เส้นข้าวซอยลวก -->
+                <path d="M 28 50 Q 50 64 72 50" stroke="#FDE047" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                <path d="M 26 56 Q 48 68 70 56" stroke="#FEF08A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <!-- ชิ้นเนื้อวัวตุ๋นทรงลูกบาศก์เข้มข้น (Braised Beef Cubes) -->
+                <g fill="#451A03" stroke="#290E02" stroke-width="1">
+                    <rect x="30" y="38" width="14" height="12" rx="2" transform="rotate(-8 30 38)"/>
+                    <rect x="48" y="36" width="16" height="13" rx="2" transform="rotate(5 48 36)"/>
+                    <rect x="38" y="48" width="15" height="12" rx="2" transform="rotate(-12 38 48)"/>
+                    <rect x="56" y="47" width="13" height="11" rx="2" transform="rotate(15 56 47)"/>
+                </g>
+                <!-- ลายชั้นเนื้อวัว/มันแทรก -->
+                <path d="M 32 42 L 40 40 M 51 40 L 60 42 M 40 52 L 48 54" stroke="#78350F" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- กรอบหมี่กรอบโรยหน้าด้านบน -->
+                <path d="M 32 30 Q 42 18 50 28 M 46 25 Q 58 16 66 28 M 38 24 Q 52 14 62 23" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <!-- ต้นหอม/ผักโรย -->
+                <circle cx="44" cy="34" r="2.5" fill="#16A34A"/>
+                <circle cx="54" cy="32" r="2" fill="#22C55E"/>
+                <circle cx="62" cy="38" r="2" fill="#16A34A"/>
+            </svg>`,
+
             M03: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#ECFDF5"/><circle cx="50" cy="52" r="38" fill="#059669"/><circle cx="50" cy="50" r="34" fill="#047857"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#10B981"/><rect x="34" y="38" width="10" height="10" rx="1" fill="#FEF08A"/><rect x="54" y="40" width="12" height="12" rx="1" fill="#FEF08A"/><circle cx="42" cy="52" r="5" fill="#854D0E"/><circle cx="58" cy="54" r="4" fill="#854D0E"/><path d="M30 48 Q50 60 70 48" stroke="#FDE047" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="48" cy="36" r="3" fill="#22C55E"/></svg>`,
             M04: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFF7ED"/><path d="M15 75 Q50 85 85 75 Q88 35 15 35 Z" fill="#15803D"/><ellipse cx="32" cy="52" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(-15 32 52)"/><ellipse cx="50" cy="54" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(-5 50 54)"/><ellipse cx="68" cy="56" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(10 68 56)"/><circle cx="30" cy="50" r="1.5" fill="#FEF08A"/><circle cx="52" cy="56" r="1.5" fill="#FEF08A"/><circle cx="66" cy="52" r="1.5" fill="#FEF08A"/><circle cx="80" cy="42" r="4" fill="#DC2626"/></svg>`,
             M05: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFFBEB"/><ellipse cx="50" cy="65" rx="36" ry="20" fill="#D97706"/><ellipse cx="50" cy="62" rx="34" ry="18" fill="#F59E0B"/><path d="M30 45 Q38 35 42 48 T55 38" stroke="#FDE047" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M45 50 Q55 38 65 52 T75 42" stroke="#FEF08A" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M25 55 Q35 48 45 60" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M55 58 Q68 48 78 58" stroke="#FDE047" stroke-width="5.5" stroke-linecap="round" fill="none"/></svg>`,
@@ -211,7 +195,6 @@
             M10: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#F8F5F0"/><polygon points="30,75 70,75 78,35 22,35" fill="#D97706" stroke="#92400E" stroke-width="2"/><ellipse cx="50" cy="35" rx="28" ry="10" fill="#F59E0B" stroke="#92400E" stroke-width="2"/><ellipse cx="50" cy="33" rx="24" ry="8" fill="#FFFFFF"/><path d="M30 45 L70 45 M26 58 L74 58 M32 35 L25 75 M44 35 L40 75 M56 35 L60 75 M68 35 L75 75" stroke="#78350F" stroke-width="1" opacity="0.6"/></svg>`
         };
 
-        // Real datasets from Lanna Eats CSV
         const menuItems = [
             { id: "M01", nameTh: "ข้าวซอยไก่", nameEn: "Khao Soi Chicken", category: "noodle", price: 69, rating: 3.6, reviews: 7 },
             { id: "M02", nameTh: "ข้าวซอยเนื้อ", nameEn: "Khao Soi Beef", category: "noodle", price: 79, rating: 3.9, reviews: 8 },
@@ -230,9 +213,7 @@
         let activeDiscountPercent = 0;
         let isSpinning = false;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            renderMenu();
-        });
+        document.addEventListener("DOMContentLoaded", () => renderMenu());
 
         function setCategory(cat) {
             activeCategory = cat;
@@ -261,42 +242,33 @@
         function renderMenu(items = menuItems) {
             const container = document.getElementById('menuContainer');
             if (items.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-10 bg-white rounded-3xl border border-gray-100 p-6">
-                        <i class="fa-solid fa-utensils text-gray-300 text-3xl mb-2"></i>
-                        <p class="text-xs text-gray-500">ไม่พบเมนูที่คุณกำลังค้นหา</p>
-                    </div>`;
+                container.innerHTML = `<div class="text-center py-10 bg-white rounded-3xl p-6"><p class="text-xs text-gray-500">ไม่พบเมนูที่คุณกำลังค้นหา</p></div>`;
                 return;
             }
 
             container.innerHTML = items.map(item => `
                 <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-200/60 flex items-center space-x-3 hover:border-amber-300 transition">
-                    <!-- Vector Graphic Thumbnail (Self-Contained SVG) -->
                     <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-amber-50 flex-shrink-0 border border-amber-100 shadow-inner">
                         ${svgGraphics[item.id]}
-                        <span class="absolute bottom-1 left-1 bg-black/60 backdrop-blur-md text-amber-300 text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center space-x-1">
+                        <span class="absolute bottom-1 left-1 bg-black/60 text-amber-300 text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center space-x-1">
                             <i class="fa-solid fa-star text-[8px] text-amber-400"></i>
                             <span>${item.rating}</span>
                         </span>
                     </div>
-
-                    <!-- Item Details -->
                     <div class="flex-1 min-w-0">
                         <h4 class="font-bold text-gray-900 text-sm leading-tight line-clamp-1">${item.nameTh}</h4>
                         <p class="text-[10px] text-gray-400 mb-1.5 line-clamp-1">${item.nameEn}</p>
                         <p class="text-xs text-amber-900 font-extrabold">${item.price} <span class="text-[10px] font-normal">฿</span></p>
                     </div>
-
-                    <!-- Action Quantity Button -->
                     <div class="flex-shrink-0">
                         ${cart[item.id] ? `
                             <div class="flex items-center space-x-1.5 bg-amber-50 rounded-xl p-1 border border-amber-200">
-                                <button onclick="updateCart('${item.id}', -1)" class="w-6 h-6 bg-white rounded-lg text-amber-900 font-bold text-xs shadow-sm flex items-center justify-center">-</button>
+                                <button onclick="updateCart('${item.id}', -1)" class="w-6 h-6 bg-white rounded-lg text-amber-900 font-bold text-xs">-</button>
                                 <span class="text-xs font-bold text-amber-950 w-4 text-center">${cart[item.id]}</span>
-                                <button onclick="updateCart('${item.id}', 1)" class="w-6 h-6 bg-amber-800 rounded-lg text-white font-bold text-xs shadow-sm flex items-center justify-center">+</button>
+                                <button onclick="updateCart('${item.id}', 1)" class="w-6 h-6 bg-amber-800 rounded-lg text-white font-bold text-xs">+</button>
                             </div>
                         ` : `
-                            <button onclick="updateCart('${item.id}', 1)" class="bg-amber-100/90 text-amber-900 font-bold text-xs px-3.5 py-2 rounded-xl hover:bg-amber-800 hover:text-white active:scale-95 transition">
+                            <button onclick="updateCart('${item.id}', 1)" class="bg-amber-100/90 text-amber-900 font-bold text-xs px-3.5 py-2 rounded-xl hover:bg-amber-800 hover:text-white transition">
                                 + เพิ่ม
                             </button>
                         `}
@@ -313,27 +285,17 @@
         }
 
         function updateCartSummary() {
-            let totalQty = 0;
-            let subtotal = 0;
-
+            let totalQty = 0, subtotal = 0;
             for (let id in cart) {
                 const item = menuItems.find(m => m.id === id);
-                if (item) {
-                    totalQty += cart[id];
-                    subtotal += item.price * cart[id];
-                }
+                if (item) { totalQty += cart[id]; subtotal += item.price * cart[id]; }
             }
-
             const discount = Math.round(subtotal * (activeDiscountPercent / 100));
             const finalTotal = subtotal - discount;
 
             const badge = document.getElementById('cartBadge');
-            if (totalQty > 0) {
-                badge.innerText = totalQty;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
+            if (totalQty > 0) { badge.innerText = totalQty; badge.classList.remove('hidden'); } 
+            else { badge.classList.add('hidden'); }
 
             document.getElementById('cartTotalPrice').innerText = finalTotal;
             document.getElementById('subtotalPrice').innerText = subtotal;
@@ -341,86 +303,54 @@
             document.getElementById('finalTotalPrice').innerText = finalTotal;
         }
 
-        // Customer Lucky Wheel Modal Logic
-        function openLuckyWheel() {
-            document.getElementById('wheelModal').classList.remove('hidden');
-        }
-
-        function closeLuckyWheel() {
-            document.getElementById('wheelModal').classList.add('hidden');
-        }
-
+        function openLuckyWheel() { document.getElementById('wheelModal').classList.remove('hidden'); }
+        function closeLuckyWheel() { document.getElementById('wheelModal').classList.add('hidden'); }
         function spinWheel() {
             if (isSpinning) return;
             isSpinning = true;
-            
             const btn = document.getElementById('spinBtn');
             const wheel = document.getElementById('wheelCircle');
             const resultText = document.getElementById('wheelResult');
-
             btn.disabled = true;
-            btn.classList.add('opacity-50');
             resultText.innerText = 'กำลังสุ่มรางวัล...';
-
             const randomDeg = 1440 + Math.floor(Math.random() * 360);
             wheel.style.transform = `rotate(${randomDeg}deg)`;
-
             setTimeout(() => {
                 const rewards = [10, 15, 20];
                 const wonDiscount = rewards[Math.floor(Math.random() * rewards.length)];
-                
                 activeDiscountPercent = wonDiscount;
                 resultText.innerText = `🎉 ยินดีด้วย! คุณได้รับส่วนลด ${wonDiscount}%`;
-                
                 document.getElementById('activeDiscountBanner').classList.remove('hidden');
                 document.getElementById('discountText').innerText = `ได้รับคูปองส่วนลด ${wonDiscount}% แล้ว`;
-
                 updateCartSummary();
                 isSpinning = false;
                 btn.innerText = 'หมุนอีกครั้ง';
                 btn.disabled = false;
-                btn.classList.remove('opacity-50');
             }, 4000);
         }
 
-        // Cart Drawer Modal
-        function openCartModal() {
-            renderCartModalItems();
-            document.getElementById('cartModal').classList.remove('hidden');
-        }
-
-        function closeCartModal() {
-            document.getElementById('cartModal').classList.add('hidden');
-        }
-
+        function openCartModal() { renderCartModalItems(); document.getElementById('cartModal').classList.remove('hidden'); }
+        function closeCartModal() { document.getElementById('cartModal').classList.add('hidden'); }
         function renderCartModalItems() {
             const container = document.getElementById('cartItemsList');
             const items = Object.keys(cart);
-
             if (items.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 text-gray-400 text-xs">
-                        <i class="fa-solid fa-basket-shopping text-2xl mb-1 text-gray-300"></i>
-                        <p>ยังไม่มีสินค้าในตะกร้าของคุณ</p>
-                    </div>`;
+                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs"><p>ยังไม่มีสินค้าในตะกร้าของคุณ</p></div>`;
                 return;
             }
-
             container.innerHTML = items.map(id => {
                 const item = menuItems.find(m => m.id === id);
                 return `
                     <div class="py-2.5 flex items-center justify-between">
                         <div class="flex items-center space-x-2.5">
-                            <div class="w-9 h-9 rounded-lg overflow-hidden bg-amber-50 flex-shrink-0">
-                                ${svgGraphics[item.id]}
-                            </div>
+                            <div class="w-9 h-9 rounded-lg overflow-hidden bg-amber-50 flex-shrink-0">${svgGraphics[item.id]}</div>
                             <div>
                                 <p class="font-bold text-xs text-gray-800">${item.nameTh}</p>
                                 <p class="text-[10px] text-amber-900 font-semibold">${item.price} ฿ × ${cart[id]}</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-1.5">
-                            <button onclick="updateCart('${id}', -1); renderCartModalItems();" class="w-6 h-6 bg-gray-100 rounded text-gray-600 font-bold text-xs">-</button>
+                            <button onclick="updateCart('${id}', -1); renderCartModalItems();" class="w-6 h-6 bg-gray-100 rounded font-bold text-xs">-</button>
                             <span class="text-xs font-bold w-4 text-center">${cart[id]}</span>
                             <button onclick="updateCart('${id}', 1); renderCartModalItems();" class="w-6 h-6 bg-amber-100 text-amber-900 rounded font-bold text-xs">+</button>
                         </div>
@@ -430,10 +360,7 @@
         }
 
         function checkout() {
-            if (Object.keys(cart).length === 0) {
-                alert('กรุณาเลือกเมนูอาหารก่อนสั่งซื้อครับ');
-                return;
-            }
+            if (Object.keys(cart).length === 0) { alert('กรุณาเลือกเมนูอาหารก่อนสั่งซื้อครับ'); return; }
             alert('🎉 สั่งซื้อสำเร็จ! Lanna Eats ขอบคุณสำหรับคำสั่งซื้อครับ');
             cart = {};
             updateCartSummary();
