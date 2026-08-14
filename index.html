@@ -20,7 +20,7 @@
 </head>
 <body class="pb-24 text-gray-800 antialiased select-none">
 
-    <!-- Mobile Header -->
+    <!-- Sticky Mobile Header -->
     <header class="sticky top-0 z-40 bg-amber-900 text-white shadow-md border-b border-amber-800">
         <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-2.5">
@@ -67,11 +67,13 @@
 
     <!-- Search & Filter Controls -->
     <section class="max-w-md mx-auto px-4 mb-4">
+        <!-- Search Bar -->
         <div class="relative mb-3">
             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
             <input type="text" id="searchInput" oninput="filterMenu()" placeholder="ค้นหา ข้าวซอย, ไส้อั่ว, เครื่องดื่ม..." class="w-full pl-10 pr-4 py-2.5 bg-white rounded-2xl text-xs border border-gray-200/80 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-sm placeholder-gray-400">
         </div>
 
+        <!-- Category Filter Buttons -->
         <div class="flex space-x-2 overflow-x-auto pb-1 text-xs no-scrollbar">
             <button onclick="setCategory('all')" id="cat-all" class="cat-btn bg-amber-800 text-white px-4 py-2 rounded-xl font-medium whitespace-nowrap shadow-sm transition">ทั้งหมด</button>
             <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🍜 เมนูเส้น/ข้าวซอย</button>
@@ -80,7 +82,7 @@
         </div>
     </section>
 
-    <!-- Active Discount Banner -->
+    <!-- Active Discount Alert Banner -->
     <section id="activeDiscountBanner" class="max-w-md mx-auto px-4 hidden mb-3">
         <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-2.5 rounded-2xl text-xs flex justify-between items-center shadow-sm">
             <div class="flex items-center space-x-2">
@@ -132,6 +134,7 @@
             <h3 class="text-base font-bold text-gray-900">วงล้อล้านนาพาโชค</h3>
             <p class="text-xs text-gray-500 mb-4">กดปุ่มเพื่อรับส่วนลดประจำวัน!</p>
 
+            <!-- Wheel Circle Visual -->
             <div class="relative w-48 h-48 mx-auto my-3">
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 text-red-600 text-xl drop-shadow">
                     <i class="fa-solid fa-caret-down"></i>
@@ -151,7 +154,7 @@
                 หมุนวงล้อเสี่ยงโชค
             </button>
         </div>
-    </div
+    </div>
 
     <!-- Cart Modal Drawer -->
     <div id="cartModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end justify-center hidden">
@@ -165,10 +168,12 @@
                 </button>
             </div>
 
+            <!-- Items List -->
             <div id="cartItemsList" class="divide-y divide-gray-100 my-3 flex-1">
-                <!-- Cart items list -->
+                <!-- Cart items list populated dynamically -->
             </div>
 
+            <!-- Price Calculations Breakdown -->
             <div class="bg-amber-50/60 rounded-2xl p-3.5 text-xs space-y-2 mb-4 border border-amber-100">
                 <div class="flex justify-between text-gray-600">
                     <span>ราคารวมรายการอาหาร</span>
@@ -184,6 +189,7 @@
                 </div>
             </div>
 
+            <!-- Checkout Action Button -->
             <button onclick="checkout()" class="w-full bg-amber-800 hover:bg-amber-900 text-white py-3.5 rounded-2xl font-bold text-xs shadow-md active:scale-95 transition">
                 ยืนยันคำสั่งซื้อ
             </button>
@@ -191,108 +197,32 @@
     </div>
 
     <script>
-        // High Quality Direct CDN Images accurately representing Lanna Eats Menu
+        // Custom Self-Contained Vector Graphics Generator (No external URLs needed)
+        const svgGraphics = {
+            M01: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FEF3C7"/><circle cx="50" cy="52" r="38" fill="#D97706"/><circle cx="50" cy="50" r="34" fill="#B45309"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#F59E0B"/><path d="M38 30 Q50 15 62 30 Q50 45 38 30" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/><path d="M30 52 Q50 64 70 52" stroke="#FEF08A" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="42" cy="42" r="3" fill="#65A30D"/><circle cx="58" cy="46" r="2.5" fill="#65A30D"/><rect x="62" y="25" width="12" height="8" rx="2" fill="#EAB308" transform="rotate(15 62 25)"/></svg>`,
+            M02: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FEF3C7"/><circle cx="50" cy="52" r="38" fill="#92400E"/><circle cx="50" cy="50" r="34" fill="#78350F"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#B45309"/><rect x="36" y="38" width="12" height="10" rx="2" fill="#451A03"/><rect x="52" y="42" width="14" height="11" rx="2" fill="#451A03"/><rect x="42" y="52" width="10" height="9" rx="2" fill="#451A03"/><path d="M30 50 Q50 62 70 50" stroke="#FDE047" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="48" cy="36" r="3" fill="#16A34A"/><circle cx="56" cy="38" r="2.5" fill="#16A34A"/></svg>`,
+            M03: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#ECFDF5"/><circle cx="50" cy="52" r="38" fill="#059669"/><circle cx="50" cy="50" r="34" fill="#047857"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#10B981"/><rect x="34" y="38" width="10" height="10" rx="1" fill="#FEF08A"/><rect x="54" y="40" width="12" height="12" rx="1" fill="#FEF08A"/><circle cx="42" cy="52" r="5" fill="#854D0E"/><circle cx="58" cy="54" r="4" fill="#854D0E"/><path d="M30 48 Q50 60 70 48" stroke="#FDE047" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="48" cy="36" r="3" fill="#22C55E"/></svg>`,
+            M04: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFF7ED"/><path d="M15 75 Q50 85 85 75 Q88 35 15 35 Z" fill="#15803D"/><ellipse cx="32" cy="52" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(-15 32 52)"/><ellipse cx="50" cy="54" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(-5 50 54)"/><ellipse cx="68" cy="56" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(10 68 56)"/><circle cx="30" cy="50" r="1.5" fill="#FEF08A"/><circle cx="52" cy="56" r="1.5" fill="#FEF08A"/><circle cx="66" cy="52" r="1.5" fill="#FEF08A"/><circle cx="80" cy="42" r="4" fill="#DC2626"/></svg>`,
+            M05: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFFBEB"/><ellipse cx="50" cy="65" rx="36" ry="20" fill="#D97706"/><ellipse cx="50" cy="62" rx="34" ry="18" fill="#F59E0B"/><path d="M30 45 Q38 35 42 48 T55 38" stroke="#FDE047" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M45 50 Q55 38 65 52 T75 42" stroke="#FEF08A" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M25 55 Q35 48 45 60" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M55 58 Q68 48 78 58" stroke="#FDE047" stroke-width="5.5" stroke-linecap="round" fill="none"/></svg>`,
+            M06: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#EFF6FF"/><circle cx="50" cy="52" r="38" fill="#0284C7"/><circle cx="50" cy="50" r="34" fill="#0369A1"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#38BDF8"/><path d="M38 38 Q45 28 50 38 Q42 45 38 38" fill="#EA580C"/><path d="M52 42 Q60 30 66 42 Q58 48 52 42" fill="#EA580C"/><circle cx="44" cy="54" r="5" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/><circle cx="58" cy="52" r="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/><path d="M30 50 Q50 62 70 50" stroke="#FDE047" stroke-width="3" stroke-linecap="round" fill="none"/></svg>`,
+            M07: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFF7ED"/><rect x="35" y="20" width="30" height="60" rx="6" fill="#C2410C"/><path d="M35 20 L65 20 L65 45 Q50 52 35 45 Z" fill="#F97316"/><path d="M35 20 L65 20 L65 30 Q50 35 35 30 Z" fill="#FFEDD5"/><rect x="40" y="28" width="8" height="8" rx="1" fill="#FFFFFF" opacity="0.8"/><rect x="52" y="38" width="8" height="8" rx="1" fill="#FFFFFF" opacity="0.8"/><rect x="48" y="10" width="4" height="70" fill="#DC2626" transform="rotate(8 50 40)"/></svg>`,
+            M08: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFFBEB"/><rect x="34" y="22" width="32" height="58" rx="6" fill="#F97316"/><rect x="34" y="22" width="32" height="10" fill="#FB923C"/><circle cx="50" cy="50" r="10" fill="#FDBA74" opacity="0.5"/><path d="M28 20 A 18 18 0 0 1 50 20 Z" fill="#F97316" stroke="#EA580C" stroke-width="1.5"/><rect x="58" y="8" width="3" height="72" fill="#22C55E" transform="rotate(-12 50 40)"/></svg>`,
+            M09: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FEF2F2"/><circle cx="50" cy="52" r="38" fill="#DC2626"/><circle cx="50" cy="50" r="34" fill="#B91C1C"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#EF4444"/><path d="M28 46 Q50 58 72 46" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none"/><circle cx="40" cy="40" r="4" fill="#991B1B"/><circle cx="56" cy="42" r="5" fill="#991B1B"/><circle cx="48" cy="52" r="3" fill="#16A34A"/><circle cx="62" cy="50" r="2.5" fill="#16A34A"/></svg>`,
+            M10: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#F8F5F0"/><polygon points="30,75 70,75 78,35 22,35" fill="#D97706" stroke="#92400E" stroke-width="2"/><ellipse cx="50" cy="35" rx="28" ry="10" fill="#F59E0B" stroke="#92400E" stroke-width="2"/><ellipse cx="50" cy="33" rx="24" ry="8" fill="#FFFFFF"/><path d="M30 45 L70 45 M26 58 L74 58 M32 35 L25 75 M44 35 L40 75 M56 35 L60 75 M68 35 L75 75" stroke="#78350F" stroke-width="1" opacity="0.6"/></svg>`
+        };
+
+        // Real datasets from Lanna Eats CSV
         const menuItems = [
-            { 
-                id: "M01", 
-                nameTh: "ข้าวซอยไก่", 
-                nameEn: "Khao Soi Chicken", 
-                category: "noodle", 
-                price: 69, 
-                rating: 3.6, 
-                reviews: 7, 
-                img: "https://images.unsplash.com/photo-1569562211203-77988edd8e93?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M02", 
-                nameTh: "ข้าวซอยเนื้อ", 
-                nameEn: "Khao Soi Beef", 
-                category: "noodle", 
-                price: 79, 
-                rating: 3.9, 
-                reviews: 8, 
-                img: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M03", 
-                nameTh: "ข้าวซอยเจ", 
-                nameEn: "Khao Soi Vegan", 
-                category: "noodle", 
-                price: 69, 
-                rating: 2.7, 
-                reviews: 3, 
-                img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M04", 
-                nameTh: "ไส้อั่ว", 
-                nameEn: "Sai Ua Sausage", 
-                category: "side", 
-                price: 49, 
-                rating: 3.0, 
-                reviews: 6, 
-                img: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M05", 
-                nameTh: "แคบหมู", 
-                nameEn: "Pork Crackling", 
-                category: "side", 
-                price: 39, 
-                rating: 3.9, 
-                reviews: 8, 
-                img: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M06", 
-                nameTh: "ข้าวซอยทะเล", 
-                nameEn: "Khao Soi Seafood", 
-                category: "noodle", 
-                price: 99, 
-                rating: 4.6, 
-                reviews: 8, 
-                img: "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M07", 
-                nameTh: "ชาเย็น", 
-                nameEn: "Thai Iced Tea", 
-                category: "drink", 
-                price: 29, 
-                rating: 3.0, 
-                reviews: 3, 
-                img: "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M08", 
-                nameTh: "น้ำส้ม", 
-                nameEn: "Orange Juice", 
-                category: "drink", 
-                price: 35, 
-                rating: 4.0, 
-                reviews: 5, 
-                img: "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M09", 
-                nameTh: "ขนมจีนน้ำเงี้ยว", 
-                nameEn: "Khanom Jeen Nam Ngiao", 
-                category: "noodle", 
-                price: 59, 
-                rating: 4.0, 
-                reviews: 5, 
-                img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80" 
-            },
-            { 
-                id: "M10", 
-                nameTh: "ข้าวเหนียว", 
-                nameEn: "Sticky Rice", 
-                category: "side", 
-                price: 15, 
-                rating: 4.5, 
-                reviews: 2, 
-                img: "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=600&q=80" 
-            }
+            { id: "M01", nameTh: "ข้าวซอยไก่", nameEn: "Khao Soi Chicken", category: "noodle", price: 69, rating: 3.6, reviews: 7 },
+            { id: "M02", nameTh: "ข้าวซอยเนื้อ", nameEn: "Khao Soi Beef", category: "noodle", price: 79, rating: 3.9, reviews: 8 },
+            { id: "M03", nameTh: "ข้าวซอยเจ", nameEn: "Khao Soi Vegan", category: "noodle", price: 69, rating: 2.7, reviews: 3 },
+            { id: "M04", nameTh: "ไส้อั่ว", nameEn: "Sai Ua Sausage", category: "side", price: 49, rating: 3.0, reviews: 6 },
+            { id: "M05", nameTh: "แคบหมู", nameEn: "Pork Crackling", category: "side", price: 39, rating: 3.9, reviews: 8 },
+            { id: "M06", nameTh: "ข้าวซอยทะเล", nameEn: "Khao Soi Seafood", category: "noodle", price: 99, rating: 4.6, reviews: 8 },
+            { id: "M07", nameTh: "ชาเย็น", nameEn: "Thai Iced Tea", category: "drink", price: 29, rating: 3.0, reviews: 3 },
+            { id: "M08", nameTh: "น้ำส้ม", nameEn: "Orange Juice", category: "drink", price: 35, rating: 4.0, reviews: 5 },
+            { id: "M09", nameTh: "ขนมจีนน้ำเงี้ยว", nameEn: "Khanom Jeen Nam Ngiao", category: "noodle", price: 59, rating: 4.0, reviews: 5 },
+            { id: "M10", nameTh: "ข้าวเหนียว", nameEn: "Sticky Rice", category: "side", price: 15, rating: 4.5, reviews: 2 }
         ];
 
         let cart = {};
@@ -341,21 +271,23 @@
 
             container.innerHTML = items.map(item => `
                 <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-200/60 flex items-center space-x-3 hover:border-amber-300 transition">
-                    <!-- High Quality Food Image -->
-                    <div class="relative w-24 h-24 rounded-xl overflow-hidden bg-amber-50 flex-shrink-0">
-                        <img src="${item.img}" alt="${item.nameTh}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'">
+                    <!-- Vector Graphic Thumbnail (Self-Contained SVG) -->
+                    <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-amber-50 flex-shrink-0 border border-amber-100 shadow-inner">
+                        ${svgGraphics[item.id]}
                         <span class="absolute bottom-1 left-1 bg-black/60 backdrop-blur-md text-amber-300 text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center space-x-1">
                             <i class="fa-solid fa-star text-[8px] text-amber-400"></i>
                             <span>${item.rating}</span>
                         </span>
                     </div>
 
+                    <!-- Item Details -->
                     <div class="flex-1 min-w-0">
                         <h4 class="font-bold text-gray-900 text-sm leading-tight line-clamp-1">${item.nameTh}</h4>
                         <p class="text-[10px] text-gray-400 mb-1.5 line-clamp-1">${item.nameEn}</p>
                         <p class="text-xs text-amber-900 font-extrabold">${item.price} <span class="text-[10px] font-normal">฿</span></p>
                     </div>
 
+                    <!-- Action Quantity Button -->
                     <div class="flex-shrink-0">
                         ${cart[item.id] ? `
                             <div class="flex items-center space-x-1.5 bg-amber-50 rounded-xl p-1 border border-amber-200">
@@ -409,6 +341,7 @@
             document.getElementById('finalTotalPrice').innerText = finalTotal;
         }
 
+        // Customer Lucky Wheel Modal Logic
         function openLuckyWheel() {
             document.getElementById('wheelModal').classList.remove('hidden');
         }
@@ -450,6 +383,7 @@
             }, 4000);
         }
 
+        // Cart Drawer Modal
         function openCartModal() {
             renderCartModalItems();
             document.getElementById('cartModal').classList.remove('hidden');
@@ -477,7 +411,9 @@
                 return `
                     <div class="py-2.5 flex items-center justify-between">
                         <div class="flex items-center space-x-2.5">
-                            <img src="${item.img}" class="w-10 h-10 rounded-lg object-cover">
+                            <div class="w-9 h-9 rounded-lg overflow-hidden bg-amber-50 flex-shrink-0">
+                                ${svgGraphics[item.id]}
+                            </div>
                             <div>
                                 <p class="font-bold text-xs text-gray-800">${item.nameTh}</p>
                                 <p class="text-[10px] text-amber-900 font-semibold">${item.price} ฿ × ${cart[id]}</p>
