@@ -1,1 +1,401 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanna Eats - อาหารเหนือรสแท้</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #FAF5EF; }
+        .wheel-rotate { transition: transform 4s cubic-bezier(0.15, 0.99, 0.18, 0.99); }
+    </style>
+</head>
+<body class="pb-24 text-gray-800">
 
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-amber-800 text-white shadow-md">
+        <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-bowl-food text-2xl text-amber-300"></i>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Lanna Eats</h1>
+                    <p class="text-xs text-amber-200">ลำแต้ๆ สไตล์ล้านนา</p>
+                </div>
+            </div>
+            <!-- Branch Selector -->
+            <select id="stallSelect" class="bg-amber-900 text-amber-100 text-xs rounded-lg px-2 py-1.5 border border-amber-700 outline-none">
+                <option value="S1">สาขา Chang Klan</option>
+                <option value="S2">สาขา Nimman</option>
+                <option value="S3">สาขา Old City</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Banner & Activity Hero Section -->
+    <section class="max-w-md mx-auto p-4">
+        <div class="bg-gradient-to-r from-amber-600 to-orange-500 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden">
+            <div class="relative z-10">
+                <span class="bg-amber-800 text-amber-200 text-xs px-2.5 py-1 rounded-full font-semibold mb-2 inline-block">
+                    🎯 กิจกรรมลูกค้าประจำวัน
+                </span>
+                <h2 class="text-xl font-bold">หมุนวงล้อล้านนาพาโชค!</h2>
+                <p class="text-xs text-amber-100 mt-1">สุ่มรับส่วนลดสุดคุ้มก่อนสั่งอาหารได้เลย</p>
+                <button onclick="openLuckyWheel()" class="mt-3 bg-amber-200 text-amber-900 font-bold text-xs px-4 py-2 rounded-xl shadow hover:bg-white transition">
+                    <i class="fa-solid fa-[#FFD700] fa-spin-pulse mr-1"></i> หมุนวงล้อรับโชค
+                </button>
+            </div>
+            <i class="fa-solid fa-dharmachakra absolute -right-6 -bottom-6 text-8xl text-white opacity-15"></i>
+        </div>
+    </section>
+
+    <!-- Search & Categories -->
+    <section class="max-w-md mx-auto px-4 mb-3">
+        <!-- Search Bar -->
+        <div class="relative mb-3">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input type="text" id="searchInput" oninput="filterMenu()" placeholder="ค้นหาเมนูอร่อย..." class="w-full pl-9 pr-4 py-2 bg-white rounded-xl text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-sm">
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex space-x-2 overflow-x-auto pb-1 text-xs no-scrollbar">
+            <button onclick="setCategory('all')" id="cat-all" class="cat-btn bg-amber-700 text-white px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap shadow-sm">ทั้งหมด</button>
+            <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn bg-white text-gray-600 px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap border border-gray-200">เมนูเส้น/ข้าวซอย</button>
+            <button onclick="setCategory('side')" id="cat-side" class="cat-btn bg-white text-gray-600 px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap border border-gray-200">ของทานเล่น</button>
+            <button onclick="setCategory('drink')" id="cat-drink" class="cat-btn bg-white text-gray-600 px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap border border-gray-200">เครื่องดื่ม</button>
+        </div>
+    </section>
+
+    <!-- Active Discount Banner (Hidden by default) -->
+    <section id="activeDiscountBanner" class="max-w-md mx-auto px-4 hidden mb-3">
+        <div class="bg-green-100 border border-green-300 text-green-800 px-3 py-2 rounded-xl text-xs flex justify-between items-center shadow-sm">
+            <span><i class="fa-solid fa-ticket text-green-600 mr-1"></i> ส่วนลดที่คุณใช้ได้: <b id="discountText">ส่วนลด 0%</b></span>
+            <span class="text-[10px] text-green-600 font-semibold bg-green-200 px-2 py-0.5 rounded-full">เปิดใช้งานอยู่</span>
+        </div>
+    </section>
+
+    <!-- Menu Catalog Grid -->
+    <main class="max-w-md mx-auto px-4">
+        <div id="menuContainer" class="grid grid-cols-1 gap-3">
+            <!-- Menu items will be dynamically generated -->
+        </div>
+    </main>
+
+    <!-- Bottom Cart Navigation Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-30 shadow-lg">
+        <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="relative">
+                    <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-800">
+                        <i class="fa-solid fa-basket-shopping text-lg"></i>
+                    </div>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500">รวมทั้งหมด</p>
+                    <p class="text-base font-bold text-amber-900"><span id="cartTotalPrice">0</span> ฿</p>
+                </div>
+            </div>
+            <button onclick="openCartModal()" class="bg-amber-700 hover:bg-amber-800 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md flex items-center space-x-2">
+                <span>ดูตะกร้าสินค้า</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Lucky Wheel Modal -->
+    <div id="wheelModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative">
+            <button onclick="closeLuckyWheel()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-lg font-bold text-amber-900 mb-1">🎯 วงล้อล้านนาพาโชค</h3>
+            <p class="text-xs text-gray-500 mb-4">กดปุ่มหมุนเพื่อลุ้นรับส่วนลดพิเศษ!</p>
+
+            <!-- Wheel Circle -->
+            <div class="relative w-56 h-56 mx-auto my-2">
+                <!-- Pointer -->
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 text-red-600 text-2xl drop-shadow">
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+                <!-- Canvas Wheel -->
+                <div id="wheelCircle" class="w-full h-full rounded-full border-4 border-amber-600 shadow-inner overflow-hidden wheel-rotate flex items-center justify-center bg-gradient-to-tr from-amber-400 via-orange-300 to-amber-200">
+                    <div class="text-amber-900 font-extrabold text-sm px-4">
+                        🎁 ส่วนลดสูงสุด 20% / ฟรีแคบหมู
+                    </div>
+                </div>
+            </div>
+
+            <p id="wheelResult" class="text-sm font-bold text-green-700 min-h-[24px] my-2"></p>
+
+            <button id="spinBtn" onclick="spinWheel()" class="w-full bg-gradient-to-r from-amber-600 to-orange-500 text-white py-3 rounded-xl font-bold shadow-md hover:opacity-95 transition">
+                หมุนวงล้อทันที!
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
+        <div class="bg-white rounded-t-3xl max-w-md w-full p-5 max-h-[85vh] overflow-y-auto shadow-2xl">
+            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                <h3 class="font-bold text-gray-800 text-lg flex items-center">
+                    <i class="fa-solid fa-cart-flatbed text-amber-700 mr-2"></i> ตะกร้าของคุณ
+                </h3>
+                <button onclick="closeCartModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsList" class="divide-y divide-gray-100 my-3">
+                <!-- Cart items populated by JS -->
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="bg-gray-50 rounded-xl p-3 text-xs space-y-1.5 mb-4 border border-gray-100">
+                <div class="flex justify-between text-gray-600">
+                    <span>ราคารวมอาหาร</span>
+                    <span><span id="subtotalPrice">0</span> ฿</span>
+                </div>
+                <div class="flex justify-between text-green-700 font-medium">
+                    <span>ส่วนลดกิจกรรม</span>
+                    <span>-<span id="discountAmount">0</span> ฿</span>
+                </div>
+                <div class="flex justify-between text-sm font-bold text-gray-800 pt-1 border-t border-gray-200">
+                    <span>ยอดชำระสุทธิ</span>
+                    <span class="text-amber-800"><span id="finalTotalPrice">0</span> ฿</span>
+                </div>
+            </div>
+
+            <!-- Checkout Button -->
+            <button onclick="checkout()" class="w-full bg-amber-700 hover:bg-amber-800 text-white py-3 rounded-xl font-bold shadow-md text-sm transition">
+                ยืนยันการสั่งซื้อ
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data derived directly from the provided Lanna Eats datasets
+        const menuItems = [
+            { id: "M01", nameTh: "ข้าวซอยไก่", nameEn: "Khao Soi Chicken", category: "noodle", price: 69, rating: 3.6, reviews: 7, img: "🍗" },
+            { id: "M02", nameTh: "ข้าวซอยเนื้อ", nameEn: "Khao Soi Beef", category: "noodle", price: 79, rating: 3.9, reviews: 8, img: "🥩" },
+            { id: "M03", nameTh: "ข้าวซอยเจ", nameEn: "Khao Soi Vegan", category: "noodle", price: 69, rating: 2.7, reviews: 3, img: "🥦" },
+            { id: "M04", nameTh: "ไส้อั่ว", nameEn: "Sai Ua Sausage", category: "side", price: 49, rating: 3.0, reviews: 6, img: "🌭" },
+            { id: "M05", nameTh: "แคบหมู", nameEn: "Pork Crackling", category: "side", price: 39, rating: 3.9, reviews: 8, img: "🥓" },
+            { id: "M06", nameTh: "ข้าวซอยทะเล", nameEn: "Khao Soi Seafood", category: "noodle", price: 99, rating: 4.6, reviews: 8, img: "🦐" },
+            { id: "M07", nameTh: "ชาเย็น", nameEn: "Thai Iced Tea", category: "drink", price: 29, rating: 3.0, reviews: 3, img: "🧋" },
+            { id: "M08", nameTh: "น้ำส้ม", nameEn: "Orange Juice", category: "drink", price: 35, rating: 4.0, reviews: 5, img: "🍊" },
+            { id: "M09", nameTh: "ขนมจีนน้ำเงี้ยว", nameEn: "Khanom Jeen Nam Ngiao", category: "noodle", price: 59, rating: 4.0, reviews: 5, img: "🍜" },
+            { id: "M10", nameTh: "ข้าวเหนียว", nameEn: "Sticky Rice", category: "side", price: 15, rating: 4.5, reviews: 2, img: "🍚" }
+        ];
+
+        let cart = {};
+        let activeCategory = 'all';
+        let activeDiscountPercent = 0;
+        let isSpinning = false;
+
+        // Initialize App
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMenu();
+        });
+
+        function setCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-700', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-600');
+            });
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-gray-600');
+                activeBtn.classList.add('bg-amber-700', 'text-white');
+            }
+            filterMenu();
+        }
+
+        function filterMenu() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = menuItems.filter(item => {
+                const matchesCat = (activeCategory === 'all' || item.category === activeCategory);
+                const matchesSearch = item.nameTh.toLowerCase().includes(query) || item.nameEn.toLowerCase().includes(query);
+                return matchesCat && matchesSearch;
+            });
+            renderMenu(filtered);
+        }
+
+        function renderMenu(items = menuItems) {
+            const container = document.getElementById('menuContainer');
+            if (items.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-sm">ไม่พบรายการอาหารที่คุณค้นหา</div>`;
+                return;
+            }
+
+            container.innerHTML = items.map(item => `
+                <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-16 h-16 bg-amber-50 rounded-xl flex items-center justify-center text-3xl shadow-inner">
+                            ${item.img}
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">${item.nameTh}</h4>
+                            <p class="text-[11px] text-gray-400 mb-1">${item.nameEn}</p>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-amber-800 font-bold text-sm">${item.price} ฿</span>
+                                <span class="text-[10px] text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded font-medium">
+                                    ★ ${item.rating} (${item.reviews})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        ${cart[item.id] ? `
+                            <div class="flex items-center space-x-2 bg-amber-50 rounded-xl p-1 border border-amber-200">
+                                <button onclick="updateCart('${item.id}', -1)" class="w-7 h-7 bg-white rounded-lg text-amber-800 font-bold shadow-sm">-</button>
+                                <span class="text-xs font-bold text-amber-900 w-4 text-center">${cart[item.id]}</span>
+                                <button onclick="updateCart('${item.id}', 1)" class="w-7 h-7 bg-amber-700 rounded-lg text-white font-bold shadow-sm">+</button>
+                            </div>
+                        ` : `
+                            <button onclick="updateCart('${item.id}', 1)" class="bg-amber-100 text-amber-800 font-bold text-xs px-3 py-2 rounded-xl hover:bg-amber-700 hover:text-white transition">
+                                + เพิ่ม
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateCart(itemId, change) {
+            cart[itemId] = (cart[itemId] || 0) + change;
+            if (cart[itemId] <= 0) delete cart[itemId];
+            renderMenu();
+            updateCartSummary();
+        }
+
+        function updateCartSummary() {
+            let totalQty = 0;
+            let subtotal = 0;
+
+            for (let id in cart) {
+                const item = menuItems.find(m => m.id === id);
+                if (item) {
+                    totalQty += cart[id];
+                    subtotal += item.price * cart[id];
+                }
+            }
+
+            const discount = Math.round(subtotal * (activeDiscountPercent / 100));
+            const finalTotal = subtotal - discount;
+
+            // UI updates
+            const badge = document.getElementById('cartBadge');
+            if (totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            document.getElementById('cartTotalPrice').innerText = finalTotal;
+            document.getElementById('subtotalPrice').innerText = subtotal;
+            document.getElementById('discountAmount').innerText = discount;
+            document.getElementById('finalTotalPrice').innerText = finalTotal;
+        }
+
+        // Customer Engagement Activity Logic (Lucky Wheel)
+        function openLuckyWheel() {
+            document.getElementById('wheelModal').classList.remove('hidden');
+        }
+
+        function closeLuckyWheel() {
+            document.getElementById('wheelModal').classList.add('hidden');
+        }
+
+        function spinWheel() {
+            if (isSpinning) return;
+            isSpinning = true;
+            
+            const btn = document.getElementById('spinBtn');
+            const wheel = document.getElementById('wheelCircle');
+            const resultText = document.getElementById('wheelResult');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+            resultText.innerText = 'กำลังสุ่มโชค...';
+
+            const randomDeg = 1440 + Math.floor(Math.random() * 360);
+            wheel.style.transform = `rotate(${randomDeg}deg)`;
+
+            setTimeout(() => {
+                const rewards = [5, 10, 15, 20];
+                const wonDiscount = rewards[Math.floor(Math.random() * rewards.length)];
+                
+                activeDiscountPercent = wonDiscount;
+                resultText.innerText = `🎉 ยินดีด้วย! คุณได้รับส่วนลด ${wonDiscount}%`;
+                
+                // Show banner
+                document.getElementById('activeDiscountBanner').classList.remove('hidden');
+                document.getElementById('discountText').innerText = `ส่วนลด ${wonDiscount}% จากกิจกรรม`;
+
+                updateCartSummary();
+                isSpinning = false;
+                btn.innerText = 'หมุนอีกครั้ง';
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+            }, 4000);
+        }
+
+        // Cart Modal & Checkout
+        function openCartModal() {
+            renderCartModalItems();
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        function renderCartModalItems() {
+            const container = document.getElementById('cartItemsList');
+            const items = Object.keys(cart);
+
+            if (items.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-400 py-6 text-xs">ไม่มีสินค้าในตะกร้า</p>`;
+                return;
+            }
+
+            container.innerHTML = items.map(id => {
+                const item = menuItems.find(m => m.id === id);
+                return `
+                    <div class="py-2.5 flex items-center justify-between">
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">${item.nameTh}</p>
+                            <p class="text-xs text-amber-800 font-semibold">${item.price} ฿ × ${cart[id]}</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="updateCart('${id}', -1); renderCartModalItems();" class="w-6 h-6 bg-gray-100 rounded text-gray-600 font-bold text-xs">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${cart[id]}</span>
+                            <button onclick="updateCart('${id}', 1); renderCartModalItems();" class="w-6 h-6 bg-amber-100 rounded text-amber-800 font-bold text-xs">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function checkout() {
+            if (Object.keys(cart).length === 0) {
+                alert('กรุณาเลือกเมนูอาหารก่อนสั่งซื้อครับ');
+                return;
+            }
+            alert('🎉 สั่งซื้อสำเร็จ! ร้าน Lanna Eats กำลังจัดเตรียมอาหารให้คุณ');
+            cart = {};
+            updateCartSummary();
+            closeCartModal();
+            renderMenu();
+        }
+    </script>
+</body>
+</html>
