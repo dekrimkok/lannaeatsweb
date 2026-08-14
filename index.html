@@ -55,7 +55,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                     <span>กิจกรรมพิเศษลูกค้า Lanna Eats</span>
                 </div>
-                <h2 class="text-lg font-bold leading-tight text-white">🎡 หมุนวงล้อล้านนาพาโชค!</h2>
+                <h2 class="text-lg font-bold leading-tight text-white">หมุนวงล้อล้านนาพาโชค!</h2>
                 <p class="text-xs text-amber-100/90 mt-1">รับคูปองส่วนลดสูงสุด 20% นำมาใช้สั่งอาหารได้ทันที</p>
                 <button onclick="openLuckyWheel()" class="mt-3 bg-white text-amber-900 font-bold text-xs px-4 py-2.5 rounded-xl shadow-md hover:bg-amber-50 active:scale-95 transition flex items-center space-x-2">
                     <i class="fa-solid fa-gift text-amber-600"></i>
@@ -76,9 +76,9 @@
         <!-- Category Filter Buttons -->
         <div class="flex space-x-2 overflow-x-auto pb-1 text-xs no-scrollbar">
             <button onclick="setCategory('all')" id="cat-all" class="cat-btn bg-amber-800 text-white px-4 py-2 rounded-xl font-medium whitespace-nowrap shadow-sm transition">ทั้งหมด</button>
-            <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🍜 เมนูเส้น/ข้าวซอย</button>
-            <button onclick="setCategory('side')" id="cat-side" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🍢 ของทานเล่น</button>
-            <button onclick="setCategory('drink')" id="cat-drink" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🧋 เครื่องดื่ม</button>
+            <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">เมนูเส้น/ข้าวซอย</button>
+            <button onclick="setCategory('side')" id="cat-side" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">ของทานเล่น</button>
+            <button onclick="setCategory('drink')" id="cat-drink" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">เครื่องดื่ม</button>
         </div>
     </section>
 
@@ -142,7 +142,7 @@
                 <div id="wheelCircle" class="w-full h-full rounded-full border-4 border-amber-600 shadow-inner overflow-hidden wheel-rotate flex items-center justify-center bg-gradient-to-tr from-amber-500 via-orange-400 to-amber-300 p-2">
                     <div class="w-full h-full rounded-full border-2 border-white/40 border-dashed flex items-center justify-center text-center p-2">
                         <span class="text-amber-950 font-extrabold text-xs leading-snug">
-                            🎁 ลุ้นส่วนลด<br>10% - 20%
+                            ลุ้นส่วนลด<br>10% - 20%
                         </span>
                     </div>
                 </div>
@@ -194,10 +194,9 @@
                 ยืนยันคำสั่งซื้อ
             </button>
         </div>
-    </div>
-
+    </style>
     <script>
-        // Real datasets with exact food images matching Lanna Eats menu items
+        // Datasets with High-Quality Food Photography URLs
         const menuItems = [
             { 
                 id: "M01", 
@@ -207,7 +206,7 @@
                 price: 69, 
                 rating: 3.6, 
                 reviews: 7, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Khao_soi_kai.jpg" 
+                img: "https://images.unsplash.com/photo-1569562211203-77988edd8e93?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M02", 
@@ -217,7 +216,7 @@
                 price: 79, 
                 rating: 3.9, 
                 reviews: 8, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Khao_Soi_Beef.jpg" 
+                img: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M03", 
@@ -227,7 +226,7 @@
                 price: 69, 
                 rating: 2.7, 
                 reviews: 3, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/5/50/Khao_Soi_Vegetarian.jpg" 
+                img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M04", 
@@ -237,7 +236,7 @@
                 price: 49, 
                 rating: 3.0, 
                 reviews: 6, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/d/da/Sai_ua_01.jpg" 
+                img: "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M05", 
@@ -247,7 +246,7 @@
                 price: 39, 
                 rating: 3.9, 
                 reviews: 8, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/3/36/Kab_moo.jpg" 
+                img: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M06", 
@@ -257,7 +256,7 @@
                 price: 99, 
                 rating: 4.6, 
                 reviews: 8, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/8/82/Khao_soi_talay.jpg" 
+                img: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M07", 
@@ -267,7 +266,7 @@
                 price: 29, 
                 rating: 3.0, 
                 reviews: 3, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/5/52/Thai_iced_tea.jpg" 
+                img: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M08", 
@@ -277,7 +276,7 @@
                 price: 35, 
                 rating: 4.0, 
                 reviews: 5, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/0/05/Orangejuice.jpg" 
+                img: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M09", 
@@ -287,7 +286,7 @@
                 price: 59, 
                 rating: 4.0, 
                 reviews: 5, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Khanom_chin_nam_ngiao_2.jpg" 
+                img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=500&auto=format&fit=crop" 
             },
             { 
                 id: "M10", 
@@ -297,7 +296,7 @@
                 price: 15, 
                 rating: 4.5, 
                 reviews: 2, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Sticky_rice_in_kratip.jpg" 
+                img: "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=500&auto=format&fit=crop" 
             }
         ];
 
@@ -446,7 +445,7 @@
                 const wonDiscount = rewards[Math.floor(Math.random() * rewards.length)];
                 
                 activeDiscountPercent = wonDiscount;
-                resultText.innerText = `🎉 ยินดีด้วย! คุณได้รับส่วนลด ${wonDiscount}%`;
+                resultText.innerText = `ยินดีด้วย! คุณได้รับส่วนลด ${wonDiscount}%`;
                 
                 document.getElementById('activeDiscountBanner').classList.remove('hidden');
                 document.getElementById('discountText').innerText = `ได้รับคูปองส่วนลด ${wonDiscount}% แล้ว`;
@@ -508,7 +507,7 @@
                 alert('กรุณาเลือกเมนูอาหารก่อนสั่งซื้อครับ');
                 return;
             }
-            alert('🎉 สั่งซื้อสำเร็จ! Lanna Eats ขอบคุณสำหรับคำสั่งซื้อครับ');
+            alert('สั่งซื้อสำเร็จ! Lanna Eats ขอบคุณสำหรับคำสั่งซื้อครับ');
             cart = {};
             updateCartSummary();
             closeCartModal();
