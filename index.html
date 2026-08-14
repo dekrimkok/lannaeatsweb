@@ -25,7 +25,7 @@
         <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-2.5">
                 <div class="w-9 h-9 bg-amber-500/20 rounded-full flex items-center justify-center border border-amber-400/30">
-                    <i class="fa-solid fa-bowl-food text-amber-300 text-lg"></i>
+                    <i class="fa-solid fa-utensils text-amber-300 text-base"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-base leading-none text-amber-50">Lanna Eats</h1>
@@ -51,7 +51,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                     <span>กิจกรรมพิเศษลูกค้า Lanna Eats</span>
                 </div>
-                <h2 class="text-lg font-bold leading-tight text-white">🎡 หมุนวงล้อล้านนาพาโชค!</h2>
+                <h2 class="text-lg font-bold leading-tight text-white">หมุนวงล้อล้านนาพาโชค!</h2>
                 <p class="text-xs text-amber-100/90 mt-1">รับคูปองส่วนลดสูงสุด 20% นำมาใช้สั่งอาหารได้ทันที</p>
                 <button onclick="openLuckyWheel()" class="mt-3 bg-white text-amber-900 font-bold text-xs px-4 py-2.5 rounded-xl shadow-md hover:bg-amber-50 active:scale-95 transition flex items-center space-x-2">
                     <i class="fa-solid fa-gift text-amber-600"></i>
@@ -70,9 +70,9 @@
 
         <div class="flex space-x-2 overflow-x-auto pb-1 text-xs no-scrollbar">
             <button onclick="setCategory('all')" id="cat-all" class="cat-btn bg-amber-800 text-white px-4 py-2 rounded-xl font-medium whitespace-nowrap shadow-sm transition">ทั้งหมด</button>
-            <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🍜 เมนูเส้น/ข้าวซอย</button>
-            <button onclick="setCategory('side')" id="cat-side" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🍢 ของทานเล่น</button>
-            <button onclick="setCategory('drink')" id="cat-drink" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">🧋 เครื่องดื่ม</button>
+            <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">เมนูเส้น/ข้าวซอย</button>
+            <button onclick="setCategory('side')" id="cat-side" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">ของทานเล่น</button>
+            <button onclick="setCategory('drink')" id="cat-drink" class="cat-btn bg-white text-gray-600 px-4 py-2 rounded-xl font-medium whitespace-nowrap border border-gray-200/80 transition">เครื่องดื่ม</button>
         </div>
     </section>
 
@@ -126,7 +126,7 @@
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 text-red-600 text-xl drop-shadow"><i class="fa-solid fa-caret-down"></i></div>
                 <div id="wheelCircle" class="w-full h-full rounded-full border-4 border-amber-600 shadow-inner overflow-hidden wheel-rotate flex items-center justify-center bg-gradient-to-tr from-amber-500 via-orange-400 to-amber-300 p-2">
                     <div class="w-full h-full rounded-full border-2 border-white/40 border-dashed flex items-center justify-center text-center p-2">
-                        <span class="text-amber-950 font-extrabold text-xs leading-snug">🎁 ลุ้นส่วนลด<br>10% - 20%</span>
+                        <span class="text-amber-950 font-extrabold text-xs leading-snug">ลุ้นส่วนลด<br>10% - 20%</span>
                     </div>
                 </div>
             </div>
@@ -152,60 +152,18 @@
     </div>
 
     <script>
-        const svgGraphics = {
-            M01: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FEF3C7"/><circle cx="50" cy="52" r="38" fill="#D97706"/><circle cx="50" cy="50" r="34" fill="#B45309"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#F59E0B"/><path d="M38 30 Q50 15 62 30 Q50 45 38 30" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/><path d="M30 52 Q50 64 70 52" stroke="#FEF08A" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="42" cy="42" r="3" fill="#65A30D"/><circle cx="58" cy="46" r="2.5" fill="#65A30D"/><rect x="62" y="25" width="12" height="8" rx="2" fill="#EAB308" transform="rotate(15 62 25)"/></svg>`,
-            
-            // 🥩 อัปเดตข้าวซอยเนื้อ (M02) ชัดเจนยิ่งขึ้น
-            M02: `<svg viewBox="0 0 100 100" class="w-full h-full">
-                <!-- พื้นหลังชาม & น้ำแกงเข้มข้น -->
-                <rect width="100" height="100" fill="#FEF3C7"/>
-                <circle cx="50" cy="52" r="38" fill="#78350F"/>
-                <circle cx="50" cy="50" r="34" fill="#581C87" opacity="0.15"/>
-                <circle cx="50" cy="50" r="33" fill="#92400E"/>
-                <!-- น้ำมันพริกเผาหน้าแกง -->
-                <path d="M 22 45 C 35 32, 65 32, 78 45 C 68 62, 32 62, 22 45 Z" fill="#B45309"/>
-                <path d="M 30 40 Q 50 30 70 40 Q 60 55 30 40 Z" fill="#991B1B" opacity="0.7"/>
-                <!-- เส้นข้าวซอยลวก -->
-                <path d="M 28 50 Q 50 64 72 50" stroke="#FDE047" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                <path d="M 26 56 Q 48 68 70 56" stroke="#FEF08A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                <!-- ชิ้นเนื้อวัวตุ๋นทรงลูกบาศก์เข้มข้น (Braised Beef Cubes) -->
-                <g fill="#451A03" stroke="#290E02" stroke-width="1">
-                    <rect x="30" y="38" width="14" height="12" rx="2" transform="rotate(-8 30 38)"/>
-                    <rect x="48" y="36" width="16" height="13" rx="2" transform="rotate(5 48 36)"/>
-                    <rect x="38" y="48" width="15" height="12" rx="2" transform="rotate(-12 38 48)"/>
-                    <rect x="56" y="47" width="13" height="11" rx="2" transform="rotate(15 56 47)"/>
-                </g>
-                <!-- ลายชั้นเนื้อวัว/มันแทรก -->
-                <path d="M 32 42 L 40 40 M 51 40 L 60 42 M 40 52 L 48 54" stroke="#78350F" stroke-width="1.5" stroke-linecap="round"/>
-                <!-- กรอบหมี่กรอบโรยหน้าด้านบน -->
-                <path d="M 32 30 Q 42 18 50 28 M 46 25 Q 58 16 66 28 M 38 24 Q 52 14 62 23" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                <!-- ต้นหอม/ผักโรย -->
-                <circle cx="44" cy="34" r="2.5" fill="#16A34A"/>
-                <circle cx="54" cy="32" r="2" fill="#22C55E"/>
-                <circle cx="62" cy="38" r="2" fill="#16A34A"/>
-            </svg>`,
-
-            M03: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#ECFDF5"/><circle cx="50" cy="52" r="38" fill="#059669"/><circle cx="50" cy="50" r="34" fill="#047857"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#10B981"/><rect x="34" y="38" width="10" height="10" rx="1" fill="#FEF08A"/><rect x="54" y="40" width="12" height="12" rx="1" fill="#FEF08A"/><circle cx="42" cy="52" r="5" fill="#854D0E"/><circle cx="58" cy="54" r="4" fill="#854D0E"/><path d="M30 48 Q50 60 70 48" stroke="#FDE047" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="48" cy="36" r="3" fill="#22C55E"/></svg>`,
-            M04: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFF7ED"/><path d="M15 75 Q50 85 85 75 Q88 35 15 35 Z" fill="#15803D"/><ellipse cx="32" cy="52" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(-15 32 52)"/><ellipse cx="50" cy="54" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(-5 50 54)"/><ellipse cx="68" cy="56" rx="10" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2" transform="rotate(10 68 56)"/><circle cx="30" cy="50" r="1.5" fill="#FEF08A"/><circle cx="52" cy="56" r="1.5" fill="#FEF08A"/><circle cx="66" cy="52" r="1.5" fill="#FEF08A"/><circle cx="80" cy="42" r="4" fill="#DC2626"/></svg>`,
-            M05: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFFBEB"/><ellipse cx="50" cy="65" rx="36" ry="20" fill="#D97706"/><ellipse cx="50" cy="62" rx="34" ry="18" fill="#F59E0B"/><path d="M30 45 Q38 35 42 48 T55 38" stroke="#FDE047" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M45 50 Q55 38 65 52 T75 42" stroke="#FEF08A" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M25 55 Q35 48 45 60" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M55 58 Q68 48 78 58" stroke="#FDE047" stroke-width="5.5" stroke-linecap="round" fill="none"/></svg>`,
-            M06: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#EFF6FF"/><circle cx="50" cy="52" r="38" fill="#0284C7"/><circle cx="50" cy="50" r="34" fill="#0369A1"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#38BDF8"/><path d="M38 38 Q45 28 50 38 Q42 45 38 38" fill="#EA580C"/><path d="M52 42 Q60 30 66 42 Q58 48 52 42" fill="#EA580C"/><circle cx="44" cy="54" r="5" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/><circle cx="58" cy="52" r="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/><path d="M30 50 Q50 62 70 50" stroke="#FDE047" stroke-width="3" stroke-linecap="round" fill="none"/></svg>`,
-            M07: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFF7ED"/><rect x="35" y="20" width="30" height="60" rx="6" fill="#C2410C"/><path d="M35 20 L65 20 L65 45 Q50 52 35 45 Z" fill="#F97316"/><path d="M35 20 L65 20 L65 30 Q50 35 35 30 Z" fill="#FFEDD5"/><rect x="40" y="28" width="8" height="8" rx="1" fill="#FFFFFF" opacity="0.8"/><rect x="52" y="38" width="8" height="8" rx="1" fill="#FFFFFF" opacity="0.8"/><rect x="48" y="10" width="4" height="70" fill="#DC2626" transform="rotate(8 50 40)"/></svg>`,
-            M08: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FFFBEB"/><rect x="34" y="22" width="32" height="58" rx="6" fill="#F97316"/><rect x="34" y="22" width="32" height="10" fill="#FB923C"/><circle cx="50" cy="50" r="10" fill="#FDBA74" opacity="0.5"/><path d="M28 20 A 18 18 0 0 1 50 20 Z" fill="#F97316" stroke="#EA580C" stroke-width="1.5"/><rect x="58" y="8" width="3" height="72" fill="#22C55E" transform="rotate(-12 50 40)"/></svg>`,
-            M09: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#FEF2F2"/><circle cx="50" cy="52" r="38" fill="#DC2626"/><circle cx="50" cy="50" r="34" fill="#B91C1C"/><path d="M25 48 C35 38, 65 38, 75 48 C65 62, 35 62, 25 48" fill="#EF4444"/><path d="M28 46 Q50 58 72 46" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none"/><circle cx="40" cy="40" r="4" fill="#991B1B"/><circle cx="56" cy="42" r="5" fill="#991B1B"/><circle cx="48" cy="52" r="3" fill="#16A34A"/><circle cx="62" cy="50" r="2.5" fill="#16A34A"/></svg>`,
-            M10: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" fill="#F8F5F0"/><polygon points="30,75 70,75 78,35 22,35" fill="#D97706" stroke="#92400E" stroke-width="2"/><ellipse cx="50" cy="35" rx="28" ry="10" fill="#F59E0B" stroke="#92400E" stroke-width="2"/><ellipse cx="50" cy="33" rx="24" ry="8" fill="#FFFFFF"/><path d="M30 45 L70 45 M26 58 L74 58 M32 35 L25 75 M44 35 L40 75 M56 35 L60 75 M68 35 L75 75" stroke="#78350F" stroke-width="1" opacity="0.6"/></svg>`
-        };
-
+        // ใช้ URL รูปภาพอาหารจริงคุณภาพสูง (ภาพถ่ายจริงสำหรับแต่ละเมนู)
         const menuItems = [
-            { id: "M01", nameTh: "ข้าวซอยไก่", nameEn: "Khao Soi Chicken", category: "noodle", price: 69, rating: 3.6, reviews: 7 },
-            { id: "M02", nameTh: "ข้าวซอยเนื้อ", nameEn: "Khao Soi Beef", category: "noodle", price: 79, rating: 3.9, reviews: 8 },
-            { id: "M03", nameTh: "ข้าวซอยเจ", nameEn: "Khao Soi Vegan", category: "noodle", price: 69, rating: 2.7, reviews: 3 },
-            { id: "M04", nameTh: "ไส้อั่ว", nameEn: "Sai Ua Sausage", category: "side", price: 49, rating: 3.0, reviews: 6 },
-            { id: "M05", nameTh: "แคบหมู", nameEn: "Pork Crackling", category: "side", price: 39, rating: 3.9, reviews: 8 },
-            { id: "M06", nameTh: "ข้าวซอยทะเล", nameEn: "Khao Soi Seafood", category: "noodle", price: 99, rating: 4.6, reviews: 8 },
-            { id: "M07", nameTh: "ชาเย็น", nameEn: "Thai Iced Tea", category: "drink", price: 29, rating: 3.0, reviews: 3 },
-            { id: "M08", nameTh: "น้ำส้ม", nameEn: "Orange Juice", category: "drink", price: 35, rating: 4.0, reviews: 5 },
-            { id: "M09", nameTh: "ขนมจีนน้ำเงี้ยว", nameEn: "Khanom Jeen Nam Ngiao", category: "noodle", price: 59, rating: 4.0, reviews: 5 },
-            { id: "M10", nameTh: "ข้าวเหนียว", nameEn: "Sticky Rice", category: "side", price: 15, rating: 4.5, reviews: 2 }
+            { id: "M01", nameTh: "ข้าวซอยไก่", nameEn: "Khao Soi Chicken", category: "noodle", price: 69, rating: 4.8, image: "https://images.unsplash.com/photo-1569562211203-75a5961ed673?auto=format&fit=crop&w=500&q=80" },
+            { id: "M02", nameTh: "ข้าวซอยเนื้อ", nameEn: "Braised Beef Khao Soi", category: "noodle", price: 79, rating: 4.9, image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80" },
+            { id: "M03", nameTh: "ข้าวซอยเจ", nameEn: "Vegetarian Khao Soi", category: "noodle", price: 69, rating: 4.6, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80" },
+            { id: "M04", nameTh: "ไส้อั่ว", nameEn: "Northern Thai Sausage", category: "side", price: 49, rating: 4.7, image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" },
+            { id: "M05", nameTh: "แคบหมู", nameEn: "Pork Cracklings", category: "side", price: 39, rating: 4.8, image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=500&q=80" },
+            { id: "M06", nameTh: "ข้าวซอยทะเล", nameEn: "Seafood Khao Soi", category: "noodle", price: 99, rating: 4.9, image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=500&q=80" },
+            { id: "M07", nameTh: "ชาเย็น", nameEn: "Thai Milk Tea", category: "drink", price: 29, rating: 4.7, image: "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=500&q=80" },
+            { id: "M08", nameTh: "น้ำส้มคั้นสด", nameEn: "Fresh Orange Juice", category: "drink", price: 35, rating: 4.6, image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=500&q=80" },
+            { id: "M09", nameTh: "ขนมจีนน้ำเงี้ยว", nameEn: "Khanom Jeen Nam Ngiao", category: "noodle", price: 59, rating: 4.8, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=500&q=80" },
+            { id: "M10", nameTh: "ข้าวเหนียว", nameEn: "Sticky Rice", category: "side", price: 15, rating: 4.9, image: "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=500&q=80" }
         ];
 
         let cart = {};
@@ -248,9 +206,9 @@
 
             container.innerHTML = items.map(item => `
                 <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-200/60 flex items-center space-x-3 hover:border-amber-300 transition">
-                    <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-amber-50 flex-shrink-0 border border-amber-100 shadow-inner">
-                        ${svgGraphics[item.id]}
-                        <span class="absolute bottom-1 left-1 bg-black/60 text-amber-300 text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center space-x-1">
+                    <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-100 shadow-inner">
+                        <img src="${item.image}" alt="${item.nameTh}" class="w-full h-full object-cover" loading="lazy" />
+                        <span class="absolute bottom-1 left-1 bg-black/60 text-amber-300 text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center space-x-1 backdrop-blur-sm">
                             <i class="fa-solid fa-star text-[8px] text-amber-400"></i>
                             <span>${item.rating}</span>
                         </span>
@@ -263,9 +221,9 @@
                     <div class="flex-shrink-0">
                         ${cart[item.id] ? `
                             <div class="flex items-center space-x-1.5 bg-amber-50 rounded-xl p-1 border border-amber-200">
-                                <button onclick="updateCart('${item.id}', -1)" class="w-6 h-6 bg-white rounded-lg text-amber-900 font-bold text-xs">-</button>
+                                <button onclick="updateCart('${item.id}', -1)" class="w-6 h-6 bg-white rounded-lg text-amber-900 font-bold text-xs shadow-sm">-</button>
                                 <span class="text-xs font-bold text-amber-950 w-4 text-center">${cart[item.id]}</span>
-                                <button onclick="updateCart('${item.id}', 1)" class="w-6 h-6 bg-amber-800 rounded-lg text-white font-bold text-xs">+</button>
+                                <button onclick="updateCart('${item.id}', 1)" class="w-6 h-6 bg-amber-800 rounded-lg text-white font-bold text-xs shadow-sm">+</button>
                             </div>
                         ` : `
                             <button onclick="updateCart('${item.id}', 1)" class="bg-amber-100/90 text-amber-900 font-bold text-xs px-3.5 py-2 rounded-xl hover:bg-amber-800 hover:text-white transition">
@@ -319,7 +277,7 @@
                 const rewards = [10, 15, 20];
                 const wonDiscount = rewards[Math.floor(Math.random() * rewards.length)];
                 activeDiscountPercent = wonDiscount;
-                resultText.innerText = `🎉 ยินดีด้วย! คุณได้รับส่วนลด ${wonDiscount}%`;
+                resultText.innerText = `ยินดีด้วย! คุณได้รับส่วนลด ${wonDiscount}%`;
                 document.getElementById('activeDiscountBanner').classList.remove('hidden');
                 document.getElementById('discountText').innerText = `ได้รับคูปองส่วนลด ${wonDiscount}% แล้ว`;
                 updateCartSummary();
@@ -343,7 +301,7 @@
                 return `
                     <div class="py-2.5 flex items-center justify-between">
                         <div class="flex items-center space-x-2.5">
-                            <div class="w-9 h-9 rounded-lg overflow-hidden bg-amber-50 flex-shrink-0">${svgGraphics[item.id]}</div>
+                            <img src="${item.image}" alt="${item.nameTh}" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" />
                             <div>
                                 <p class="font-bold text-xs text-gray-800">${item.nameTh}</p>
                                 <p class="text-[10px] text-amber-900 font-semibold">${item.price} ฿ × ${cart[id]}</p>
@@ -361,7 +319,7 @@
 
         function checkout() {
             if (Object.keys(cart).length === 0) { alert('กรุณาเลือกเมนูอาหารก่อนสั่งซื้อครับ'); return; }
-            alert('🎉 สั่งซื้อสำเร็จ! Lanna Eats ขอบคุณสำหรับคำสั่งซื้อครับ');
+            alert('สั่งซื้อสำเร็จ! Lanna Eats ขอบคุณสำหรับคำสั่งซื้อครับ');
             cart = {};
             updateCartSummary();
             closeCartModal();
